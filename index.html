@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AppFBJ — Criamos Aplicativos PWA para Qualquer Negócio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #071426;
+    --bg2:     #0B1E38;
+    --bg3:     #0F2647;
+    --neon:    #39FF14;
+    --neon2:   #00E5FF;
+    --white:   #FFFFFF;
+    --muted:   #94A3B8;
+    --border:  rgba(57,255,20,.15);
+    --card:    rgba(255,255,255,.04);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  .eyebrow {
+    display: inline-block;
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--neon);
+    border: 1px solid var(--border);
+    padding: 5px 14px; border-radius: 20px;
+    background: rgba(57,255,20,.06);
+    margin-bottom: 18px;
+  }
+  h1 { font-size: clamp(32px,6vw,58px); font-weight: 900; line-height: 1.08; letter-spacing: -1px; }
+  h2 { font-size: clamp(24px,4vw,40px); font-weight: 800; line-height: 1.15; }
+  h3 { font-size: 17px; font-weight: 700; }
+  .highlight { color: var(--neon); text-shadow: 0 0 24px rgba(57,255,20,.4); }
+  .lead { font-size: clamp(15px,2vw,18px); color: var(--muted); line-height: 1.7; max-width: 580px; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+  section { padding: 80px 0; position: relative; }
+
+  .btn-neon {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--neon); color: #071426;
+    font-family: 'Inter'; font-weight: 800; font-size: 16px;
+    padding: 16px 32px; border-radius: 12px; border: none; cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 0 24px rgba(57,255,20,.5), 0 0 60px rgba(57,255,20,.15);
+    transition: all .2s;
+    position: relative; overflow: hidden;
+  }
+  .btn-neon::before {
+    content: "";
+    position: absolute; top: -50%; left: -60%;
+    width: 50%; height: 200%;
+    background: rgba(255,255,255,.3);
+    transform: skewX(-20deg);
+    transition: left .4s;
+  }
+  .btn-neon:hover { transform: translateY(-2px); box-shadow: 0 0 36px rgba(57,255,20,.7), 0 0 80px rgba(57,255,20,.2); }
+  .btn-neon:hover::before { left: 130%; }
+
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 1.5px solid var(--border); color: var(--white);
+    font-family: 'Inter'; font-weight: 600; font-size: 15px;
+    padding: 14px 28px; border-radius: 12px; cursor: pointer;
+    background: transparent; text-decoration: none;
+    transition: all .2s;
+  }
+  .btn-ghost:hover { border-color: var(--neon); color: var(--neon); }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+  .grid-auto { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; }
+  @media(max-width:768px) { .grid-2,.grid-3 { grid-template-columns: 1fr; } }
+  @media(max-width:520px) { .grid-auto { grid-template-columns: 1fr 1fr; } }
+
+  .divider {
+    border: none; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 0;
+  }
+
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    background:
+      radial-gradient(ellipse 70% 60% at 80% 20%, rgba(57,255,20,.07) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 10% 80%, rgba(0,229,255,.06) 0%, transparent 60%),
+      var(--bg);
+    padding-top: 80px;
+  }
+  #hero .inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+  }
+  @media(max-width:768px) { #hero .inner { grid-template-columns: 1fr; } }
+
+  .phone-wrap {
+    display: flex; justify-content: center; align-items: center;
+    position: relative;
+  }
+  .phone {
+    width: 220px; height: 440px;
+    background: linear-gradient(160deg, #0F2647, #071426);
+    border-radius: 36px;
+    border: 2px solid rgba(57,255,20,.3);
+    box-shadow:
+      0 0 40px rgba(57,255,20,.15),
+      0 40px 80px rgba(0,0,0,.6),
+      inset 0 1px 0 rgba(255,255,255,.06);
+    position: relative; overflow: hidden;
+    transform: perspective(800px) rotateY(-12deg) rotateX(3deg);
+    transition: transform .4s;
+  }
+  .phone:hover { transform: perspective(800px) rotateY(-4deg) rotateX(1deg); }
+  .phone-screen {
+    position: absolute; inset: 12px;
+    border-radius: 26px;
+    background: linear-gradient(160deg, #0B1E38, #071426);
+    overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .phone-header {
+    background: linear-gradient(135deg, #EA580C, #F97316);
+    padding: 14px 12px 10px;
+    font-size: 11px; font-weight: 800; color: #fff;
+    flex-shrink: 0;
+  }
+  .phone-header p { opacity: .75; font-size: 9px; margin-top: 2px; }
+  .phone-stat-row {
+    display: flex; gap: 6px; padding: 10px 10px 0;
+  }
+  .phone-stat {
+    flex: 1; background: rgba(57,255,20,.1); border-radius: 8px;
+    padding: 8px 6px; text-align: center;
+    border: 1px solid rgba(57,255,20,.15);
+  }
+  .phone-stat .val { font-size: 15px; font-weight: 800; color: var(--neon); }
+  .phone-stat .lbl { font-size: 7px; color: var(--muted); margin-top: 1px; }
+  .phone-card {
+    margin: 8px 10px 0;
+    background: rgba(255,255,255,.05); border-radius: 10px;
+    padding: 10px; border: 1px solid rgba(255,255,255,.06);
+  }
+  .phone-card .row { display: flex; justify-content: space-between; align-items: center; }
+  .phone-card .name { font-size: 10px; font-weight: 700; color: #fff; }
+  .phone-card .sub  { font-size: 8px; color: var(--muted); margin-top: 1px; }
+  .phone-card .price { font-size: 11px; font-weight: 800; color: var(--neon); }
+  .phone-badge { font-size: 7px; padding: 2px 6px; border-radius: 8px; font-weight: 700; background: rgba(57,255,20,.15); color: var(--neon); }
+  .phone-bottom {
+    display: flex; justify-content: space-around;
+    padding: 10px 8px;
+    border-top: 1px solid rgba(255,255,255,.06);
+    margin-top: auto;
+  }
+  .phone-nav { font-size: 16px; text-align: center; }
+  .phone-nav span { display: block; font-size: 6px; color: var(--muted); margin-top: 1px; }
+  .phone-nav.active { color: #EA580C; }
+  .phone-nav.active span { color: #EA580C; }
+  .phone-glow {
+    position: absolute; width: 300px; height: 300px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(57,255,20,.12), transparent 70%);
+    top: 50%; left: 50%; transform: translate(-50%,-50%);
+    pointer-events: none;
+  }
+
+  .check-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .check-list li {
+    display: flex; gap: 10px; align-items: flex-start;
+    font-size: 15px; color: #CBD5E1;
+  }
+  .check-list li::before {
+    content: "\2713";
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 22px; height: 22px; border-radius: 6px; flex-shrink: 0;
+    background: rgba(57,255,20,.15); color: var(--neon);
+    font-size: 12px; font-weight: 800; margin-top: 1px;
+  }
+
+  .sec-head { text-align: center; margin-bottom: 48px; }
+  .sec-head p { color: var(--muted); font-size: 16px; margin-top: 12px; max-width: 560px; margin-left: auto; margin-right: auto; }
+
+  .app-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px; padding: 22px 18px;
+    transition: all .2s; cursor: default;
+    position: relative; overflow: hidden;
+  }
+  .app-card::after {
+    content: ""; position: absolute; inset: 0; border-radius: 16px;
+    background: linear-gradient(135deg, rgba(57,255,20,.05), transparent);
+    opacity: 0; transition: opacity .2s;
+  }
+  .app-card:hover { border-color: rgba(57,255,20,.4); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(57,255,20,.08); }
+  .app-card:hover::after { opacity: 1; }
+  .app-icon { font-size: 32px; margin-bottom: 10px; }
+  .app-card h3 { font-size: 15px; color: var(--white); }
+  .app-card p { font-size: 13px; color: var(--muted); margin-top: 6px; line-height: 1.5; }
+
+  #why { background: radial-gradient(ellipse 80% 50% at 50% 50%, rgba(0,229,255,.04), transparent); }
+  .pwa-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(0,229,255,.08); border: 1px solid rgba(0,229,255,.2);
+    border-radius: 12px; padding: 14px 18px;
+    font-size: 14px; font-weight: 600; color: #E2E8F0;
+    transition: all .2s;
+  }
+  .pwa-pill:hover { background: rgba(0,229,255,.14); border-color: rgba(0,229,255,.4); transform: translateX(4px); }
+  .pwa-pill .icon { font-size: 20px; }
+
+  .transform-box {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 20px; padding: 32px;
+    position: relative; overflow: hidden;
+  }
+  .transform-box::before {
+    content: "";
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--neon2), var(--neon));
+  }
+  .feature-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(57,255,20,.07); border: 1px solid rgba(57,255,20,.2);
+    border-radius: 8px; padding: 8px 14px;
+    font-size: 13px; font-weight: 600; color: #CBD5E1;
+    margin: 4px;
+  }
+  .feature-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--neon); flex-shrink: 0; }
+
+  .stats-bar {
+    background: linear-gradient(135deg, var(--bg2), var(--bg3));
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    padding: 32px 0;
+  }
+  .stat-item { text-align: center; }
+  .stat-item .num { font-size: 36px; font-weight: 900; color: var(--neon); text-shadow: 0 0 20px rgba(57,255,20,.3); }
+  .stat-item .lbl { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+  #cta {
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 50%, rgba(57,255,20,.06), transparent),
+      var(--bg);
+    text-align: center;
+  }
+  .cta-box {
+    background: linear-gradient(135deg, #0B1E38, #0F2647);
+    border: 1px solid rgba(57,255,20,.2);
+    border-radius: 28px; padding: 60px 40px;
+    position: relative; overflow: hidden;
+    box-shadow: 0 0 60px rgba(57,255,20,.05);
+  }
+  .cta-box::before {
+    content: "";
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--neon), transparent);
+  }
+  .whatsapp-num {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(57,255,20,.08); border: 1px solid rgba(57,255,20,.2);
+    border-radius: 12px; padding: 12px 22px;
+    font-size: 18px; font-weight: 800; color: var(--neon);
+    margin-bottom: 28px; letter-spacing: 1px;
+  }
+
+  .wa-float {
+    position: fixed; bottom: 24px; right: 20px; z-index: 999;
+    width: 58px; height: 58px; border-radius: 50%;
+    background: #25D366;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 30px; text-decoration: none;
+    box-shadow: 0 4px 20px rgba(37,211,102,.5), 0 0 0 0 rgba(37,211,102,.4);
+    animation: waPulse 2s infinite;
+    transition: transform .2s;
+  }
+  .wa-float:hover { transform: scale(1.1); }
+  @keyframes waPulse {
+    0%   { box-shadow: 0 4px 20px rgba(37,211,102,.5), 0 0 0 0 rgba(37,211,102,.4); }
+    70%  { box-shadow: 0 4px 20px rgba(37,211,102,.5), 0 0 0 14px rgba(37,211,102,.0); }
+    100% { box-shadow: 0 4px 20px rgba(37,211,102,.5), 0 0 0 0 rgba(37,211,102,.0); }
+  }
+
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 500;
+    background: rgba(7,20,38,.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 20px;
+  }
+  .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+  .nav-logo { font-size: 18px; font-weight: 900; color: var(--white); }
+  .nav-logo span { color: var(--neon); }
+  .nav-cta {
+    background: var(--neon); color: #071426; border: none;
+    font-family: 'Inter'; font-weight: 800; font-size: 13px;
+    padding: 9px 20px; border-radius: 8px; cursor: pointer;
+    text-decoration: none;
+    transition: all .2s;
+    box-shadow: 0 0 14px rgba(57,255,20,.35);
+  }
+  .nav-cta:hover { box-shadow: 0 0 24px rgba(57,255,20,.6); transform: translateY(-1px); }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 28px 20px; text-align: center;
+    color: var(--muted); font-size: 13px;
+  }
+
+  .fade-up {
+    opacity: 0; transform: translateY(28px);
+    transition: opacity .6s ease, transform .6s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  .impact {
+    font-size: clamp(20px,4vw,34px); font-weight: 900;
+    line-height: 1.2; color: var(--white);
+  }
+  .impact em { font-style: normal; color: var(--neon); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">App<span>FBJ</span></div>
+    <a href="https://wa.me/5515992724313" target="_blank" class="nav-cta">💬 Falar no WhatsApp</a>
+  </div>
+</nav>
+
+<a href="https://wa.me/5515992724313" target="_blank" class="wa-float" title="WhatsApp">💬</a>
+
+<section id="hero">
+  <div class="container">
+    <div class="inner">
+      <div>
+        <span class="eyebrow">🚀 Desenvolvimento PWA</span>
+        <h1>
+          Criamos Aplicativos<br>
+          <span class="highlight">PWA</span> para<br>
+          Qualquer Negócio
+        </h1>
+        <p class="lead" style="margin-top:20px;">
+          Transformamos sua ideia em um aplicativo profissional — moderno, rápido e acessível para empresas, igrejas, prestadores de serviços e muito mais.
+        </p>
+        <ul class="check-list" style="margin-top:28px;">
+          <li>Transformamos planilhas em aplicativos</li>
+          <li>Automatizamos processos e tarefas</li>
+          <li>Painel administrativo personalizado</li>
+          <li>Funciona em Android, iPhone, Tablet e Computador</li>
+          <li>Instalação fácil, sem loja de aplicativos</li>
+          <li>Atualizações automáticas</li>
+        </ul>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:36px;">
+          <a href="https://wa.me/5515992724313" target="_blank" class="btn-neon">
+            🟢 QUERO MEU APLICATIVO
+          </a>
+          <a href="#apps" class="btn-ghost">Ver exemplos ↓</a>
+        </div>
+      </div>
+
+      <div class="phone-wrap fade-up">
+        <div class="phone-glow"></div>
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="phone-header">
+              <div style="font-size:10px;opacity:.6;margin-bottom:3px;">9:41</div>
+              <div style="font-weight:900;font-size:13px;">🏢 VidraçaPro</div>
+              <p>Gestão completa</p>
+            </div>
+            <div class="phone-stat-row">
+              <div class="phone-stat"><div class="val">14</div><div class="lbl">Orçamentos</div></div>
+              <div class="phone-stat"><div class="val">38</div><div class="lbl">Clientes</div></div>
+              <div class="phone-stat"><div class="val" style="color:#00E5FF">5</div><div class="lbl">Em andamento</div></div>
+            </div>
+            <div class="phone-card" style="margin-top:8px;">
+              <div class="row">
+                <div>
+                  <div class="name">João da Silva</div>
+                  <div class="sub">#012 • Janela 2F • 1.5×1.2m</div>
+                </div>
+                <div class="price">R$ 2.800</div>
+              </div>
+              <div style="margin-top:6px;"><span class="phone-badge">Aprovado</span></div>
+            </div>
+            <div class="phone-card">
+              <div class="row">
+                <div>
+                  <div class="name">Maria Souza</div>
+                  <div class="sub">#011 • Porta 2F • 2.0×2.1m</div>
+                </div>
+                <div class="price">R$ 4.200</div>
+              </div>
+              <div style="margin-top:6px;"><span class="phone-badge" style="background:rgba(0,229,255,.15);color:#00E5FF">Em execução</span></div>
+            </div>
+            <div class="phone-card">
+              <div class="row">
+                <div style="flex:1">
+                  <div class="name" style="font-size:9px;color:var(--muted)">SALDO DO MÊS</div>
+                  <div class="val" style="font-size:16px;font-weight:900;color:#39FF14;margin-top:2px;">R$ 18.400</div>
+                </div>
+                <div style="font-size:9px;color:#39FF14">↑ +23%</div>
+              </div>
+            </div>
+            <div class="phone-bottom">
+              <div class="phone-nav active">🏠<span>Início</span></div>
+              <div class="phone-nav">📋<span>Orçamentos</span></div>
+              <div class="phone-nav">👥<span>Clientes</span></div>
+              <div class="phone-nav">💰<span>Financeiro</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stats-bar">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:24px;">
+      <div class="stat-item fade-up"><div class="num">100%</div><div class="lbl">Funciona offline</div></div>
+      <div class="stat-item fade-up"><div class="num">4+</div><div class="lbl">Dispositivos suportados</div></div>
+      <div class="stat-item fade-up"><div class="num">3×</div><div class="lbl">Mais barato que app nativo</div></div>
+      <div class="stat-item fade-up"><div class="num">24h</div><div class="lbl">Atendimento WhatsApp</div></div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<section id="apps">
+  <div class="container">
+    <div class="sec-head fade-up">
+      <span class="eyebrow">📱 Soluções</span>
+      <h2>O que podemos criar<br>para <span class="highlight">você?</span></h2>
+      <p>Desenvolvemos para qualquer segmento. Se você tem uma ideia, nós transformamos em aplicativo.</p>
+    </div>
+    <div class="grid-auto">
+      <div class="app-card fade-up">
+        <div class="app-icon">⛪</div>
+        <h3>Aplicativos para Igrejas</h3>
+        <p>Membros, célula, financeiro, eventos e comunicação integrada.</p>
+      </div>
+      <div class="app-card fade-up">
+        <div class="app-icon">👥</div>
+        <h3>Controle de Clientes</h3>
+        <p>CRM, histórico, follow-up e integração com WhatsApp.</p>
+      </div>
+      <div class="app-card fade-up">
+        <div class="app-icon">💰</div>
+        <h3>Gestão Financeira</h3>
+        <p>Entradas, saídas, relatórios e dashboards em tempo real.</p>
+      </div>
+      <div class="app-card fade-up">
+        <div class="app-icon">📦</div>
+        <h3>Estoque e Vendas</h3>
+        <p>Produtos, movimentações, alertas de estoque mínimo.</p>
+      </div>
+      <div class="app-card fade-up">
+        <div class="app-icon">🔧</div>
+        <h3>Ordens de Serviço</h3>
+        <p>Abertura, acompanhamento e finalização de OS no celular.</p>
+      </div>
+      <div class="app-card fade-up">
+        <div class="app-icon">🛵</div>
+        <h3>Delivery</h3>
+        <p>Cardápio, pedidos, rastreamento e gestão de entregadores.</p>
+      </div>
+      <div class="app-card fade-up">
+        <div class="app-icon">📸</div>
+        <h3>Fotografia</h3>
+        <p>Portfólio, agendamento, contrato e galeria de entrega.</p>
+      </div>
+      <div class="app-card fade-up">
+        <div class="app-icon">🏠</div>
+        <h3>Imobiliárias</h3>
+        <p>Cadastro de imóveis, clientes e funil de vendas visual.</p>
+      </div>
+      <div class="app-card fade-up">
+        <div class="app-icon">📚</div>
+        <h3>Escolas e Cursos</h3>
+        <p>Alunos, turmas, frequência, financeiro e comunicados.</p>
+      </div>
+      <div class="app-card fade-up">
+        <div class="app-icon">🏗️</div>
+        <h3>Empresas de Serviços</h3>
+        <p>Vidraçaria, elétrica, pintura, hidráulica e muito mais.</p>
+      </div>
+      <div class="app-card fade-up" style="border-color:rgba(57,255,20,.3);background:rgba(57,255,20,.04);">
+        <div class="app-icon">✨</div>
+        <h3>Sob Medida</h3>
+        <p style="color:var(--neon)">Qualquer ideia. Desenvolvemos exatamente o que você precisa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="why">
+  <div class="container">
+    <div class="grid-2" style="gap:60px;align-items:center;">
+      <div class="fade-up">
+        <span class="eyebrow">⚡ Por que PWA?</span>
+        <h2>A experiência de um app<br><span class="highlight">sem a burocracia</span></h2>
+        <p style="color:var(--muted);font-size:15px;line-height:1.7;margin:20px 0 28px;">
+          Um PWA oferece tudo que um aplicativo nativo entrega, com muito mais velocidade de entrega e menor custo. Funciona em qualquer dispositivo com um navegador.
+        </p>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div class="pwa-pill"><span class="icon">💸</span> Menor custo de desenvolvimento</div>
+          <div class="pwa-pill"><span class="icon">📱</span> Funciona em qualquer dispositivo</div>
+          <div class="pwa-pill"><span class="icon">⚡</span> Atualizações instantâneas</div>
+          <div class="pwa-pill"><span class="icon">⬇️</span> Instalação em poucos segundos</div>
+          <div class="pwa-pill"><span class="icon">🚀</span> Mais rápido para colocar no mercado</div>
+          <div class="pwa-pill"><span class="icon">📴</span> Funciona mesmo offline</div>
+        </div>
+      </div>
+      <div class="fade-up">
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div style="background:rgba(57,255,20,.04);border:1px solid rgba(57,255,20,.2);border-radius:16px;padding:24px;">
+            <p style="font-size:12px;font-weight:700;color:var(--neon);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;">✅ PWA — Nossa solução</p>
+            <ul class="check-list">
+              <li>Sem aprovação de loja</li>
+              <li>Funciona no navegador de qualquer celular</li>
+              <li>Atualiza sozinho automaticamente</li>
+              <li>Uma versão para todos os dispositivos</li>
+              <li>Entrega muito mais rápida</li>
+            </ul>
+          </div>
+          <div style="background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:24px;opacity:.7;">
+            <p style="font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;">❌ App Nativo — Método antigo</p>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+              <li style="font-size:14px;color:var(--muted);display:flex;gap:10px;align-items:center;"><span style="color:#EF4444">✕</span> Precisa publicar na App Store e Google Play</li>
+              <li style="font-size:14px;color:var(--muted);display:flex;gap:10px;align-items:center;"><span style="color:#EF4444">✕</span> Dois códigos separados (iOS e Android)</li>
+              <li style="font-size:14px;color:var(--muted);display:flex;gap:10px;align-items:center;"><span style="color:#EF4444">✕</span> Custo muito elevado</li>
+              <li style="font-size:14px;color:var(--muted);display:flex;gap:10px;align-items:center;"><span style="color:#EF4444">✕</span> Demora meses para sair</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="transform">
+  <div class="container">
+    <div class="sec-head fade-up">
+      <span class="eyebrow">🎯 Transformação Digital</span>
+      <h2>Transformamos<br><span class="highlight">Planilhas em Aplicativos</span></h2>
+      <p>Você controla seu negócio em planilhas? Nós transformamos tudo isso num sistema profissional e automático.</p>
+    </div>
+
+    <div class="transform-box fade-up">
+      <div class="grid-2" style="gap:40px;align-items:center;">
+        <div>
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:24px;">
+            <div style="font-size:48px;">📊</div>
+            <div style="font-size:32px;color:var(--neon);font-weight:900;">→</div>
+            <div style="font-size:48px;">📱</div>
+          </div>
+          <p style="color:var(--muted);font-size:15px;line-height:1.7;">
+            Suas planilhas viram um sistema completo com login, dashboards, relatórios automáticos e controle de usuários — acessível de qualquer celular.
+          </p>
+        </div>
+        <div>
+          <p style="font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;">Tudo que desenvolvemos:</p>
+          <div>
+            <span class="feature-pill"><span class="dot"></span>Cadastros</span>
+            <span class="feature-pill"><span class="dot"></span>Relatórios</span>
+            <span class="feature-pill"><span class="dot"></span>Consultas</span>
+            <span class="feature-pill"><span class="dot"></span>Dashboards</span>
+            <span class="feature-pill"><span class="dot"></span>Controle de usuários</span>
+            <span class="feature-pill"><span class="dot"></span>Automação de processos</span>
+            <span class="feature-pill"><span class="dot"></span>Integração com banco de dados</span>
+            <span class="feature-pill"><span class="dot"></span>Painel administrativo</span>
+            <span class="feature-pill"><span class="dot"></span>Notificações push</span>
+            <span class="feature-pill"><span class="dot"></span>Modo offline</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section>
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
+      <div class="fade-up">
+        <span class="eyebrow">💼 Soluções Personalizadas</span>
+        <h2>Cada negócio<br>é <span class="highlight">único</span></h2>
+        <p style="color:var(--muted);font-size:15px;line-height:1.7;margin:20px 0;">
+          Desenvolvemos aplicativos de acordo com a necessidade da sua empresa, sem modelos prontos limitados. Sua ideia sai do papel e vira um sistema moderno e profissional.
+        </p>
+        <a href="https://wa.me/5515992724313" target="_blank" class="btn-neon" style="font-size:15px;">
+          💬 Conversar sobre meu projeto
+        </a>
+      </div>
+      <div class="fade-up" style="display:flex;flex-direction:column;gap:14px;">
+        <div style="display:flex;align-items:flex-start;gap:14px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;">
+          <div style="width:36px;height:36px;border-radius:10px;background:rgba(57,255,20,.12);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">💬</div>
+          <div><p style="font-weight:700;font-size:14px;color:var(--white)">Levantamento de requisitos</p><p style="font-size:13px;color:var(--muted);margin-top:3px;">Conversamos sobre sua ideia e mapeamos tudo que precisa ser feito.</p></div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:14px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;">
+          <div style="width:36px;height:36px;border-radius:10px;background:rgba(57,255,20,.12);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">⚡</div>
+          <div><p style="font-weight:700;font-size:14px;color:var(--white)">Desenvolvimento ágil</p><p style="font-size:13px;color:var(--muted);margin-top:3px;">Entregamos versões rápidas para você acompanhar o progresso.</p></div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:14px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;">
+          <div style="width:36px;height:36px;border-radius:10px;background:rgba(57,255,20,.12);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🎓</div>
+          <div><p style="font-weight:700;font-size:14px;color:var(--white)">Treinamento incluído</p><p style="font-size:13px;color:var(--muted);margin-top:3px;">Treinamos você e sua equipe para usar o sistema com confiança.</p></div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:14px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;">
+          <div style="width:36px;height:36px;border-radius:10px;background:rgba(57,255,20,.12);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🛡️</div>
+          <div><p style="font-weight:700;font-size:14px;color:var(--white)">Suporte contínuo</p><p style="font-size:13px;color:var(--muted);margin-top:3px;">Estamos disponíveis para manutenção e melhorias quando precisar.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="cta">
+  <div class="container">
+    <div class="cta-box fade-up">
+      <span class="eyebrow">📞 Solicite um Orçamento</span>
+      <h2 style="margin-bottom:16px;">Seu aplicativo começa <span class="highlight">aqui!</span></h2>
+      <p style="color:var(--muted);font-size:16px;max-width:480px;margin:0 auto 28px;line-height:1.7;">
+        Clique no botão abaixo e converse diretamente conosco. Sem enrolação, sem formulário burocrático.
+      </p>
+      <div class="whatsapp-num">
+        <span>💬</span> 15 99272-4313
+      </div>
+      <br>
+      <a href="https://wa.me/5515992724313" target="_blank" class="btn-neon" style="font-size:17px;padding:18px 40px;">
+        🟢 QUERO MEU APLICATIVO
+      </a>
+    </div>
+  </div>
+</section>
+
+<section style="padding:60px 0;text-align:center;background:var(--bg);">
+  <div class="container">
+    <p class="impact fade-up">
+      "Seu negócio merece um aplicativo próprio.<br>
+      <em>Nós transformamos sua ideia em realidade.</em> 🚀📱"
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p style="font-size:16px;font-weight:800;color:var(--white);margin-bottom:6px;">App<span style="color:var(--neon)">FBJ</span></p>
+    <p>Desenvolvimento de Aplicativos PWA • Sorocaba/SP</p>
+    <p style="margin-top:6px;"><a href="https://wa.me/5515992724313" style="color:var(--neon);text-decoration:none;">📱 (15) 99272-4313</a></p>
+    <p style="margin-top:16px;font-size:11px;opacity:.5;">© 2025 AppFBJ. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
