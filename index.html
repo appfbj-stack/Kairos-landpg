@@ -330,6 +330,107 @@
     line-height: 1.2; color: var(--white);
   }
   .impact em { font-style: normal; color: var(--neon); }
+
+  @media(max-width:768px) {
+    section { padding: 48px 0; }
+    .sec-head { margin-bottom: 32px; }
+    .container { padding: 0 16px; }
+    .btn-neon { width: 100%; justify-content: center; font-size: 15px; padding: 14px 24px; }
+    .btn-ghost { width: 100%; justify-content: center; text-align: center; }
+    #hero .inner { gap: 32px; }
+    #hero .inner > div:first-child { order: 1; }
+    #hero .inner > .phone-wrap { order: 0; }
+    .phone { width: 180px; height: 360px; transform: perspective(600px) rotateY(-6deg) rotateX(2deg); }
+    .phone:hover { transform: perspective(600px) rotateY(-2deg) rotateX(1deg); }
+    .phone-screen { inset: 10px; border-radius: 22px; }
+    .phone-header { padding: 10px 10px 8px; font-size: 10px; }
+    .phone-stat-row { padding: 8px 8px 0; gap: 4px; }
+    .phone-stat .val { font-size: 12px; }
+    .phone-stat .lbl { font-size: 6px; }
+    .phone-card { margin: 6px 8px 0; padding: 8px; }
+    .phone-card .name { font-size: 9px; }
+    .phone-card .sub { font-size: 7px; }
+    .phone-card .price { font-size: 10px; }
+    .phone-bottom { padding: 8px 6px; }
+    .phone-nav { font-size: 14px; }
+    .phone-glow { width: 200px; height: 200px; }
+    .stats-bar .stat-item .num { font-size: 28px; }
+    .stats-bar .stat-item .lbl { font-size: 12px; }
+    .grid-auto { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .app-card { padding: 18px 14px; }
+    .app-icon { font-size: 26px; }
+    .app-card h3 { font-size: 14px; }
+    .app-card p { font-size: 12px; }
+    .cta-box { padding: 36px 20px; border-radius: 20px; }
+    .whatsapp-num { font-size: 16px; padding: 10px 16px; flex-wrap: wrap; justify-content: center; }
+    .transform-box { padding: 24px 18px; }
+    .pwa-pill { font-size: 13px; padding: 12px 14px; }
+    .check-list li { font-size: 14px; }
+    .wa-float { width: 50px; height: 50px; font-size: 26px; bottom: 16px; right: 16px; }
+    nav { padding: 10px 16px; }
+    .nav-logo { font-size: 16px; }
+    .nav-cta { font-size: 12px; padding: 7px 14px; }
+    .feature-pill { font-size: 12px; padding: 6px 10px; }
+    #why .grid-2 { display: grid; grid-template-columns: 1fr; gap: 32px; }
+    #why .grid-2 > div:first-child { order: 2; }
+    #why .grid-2 > div:last-child { order: 1; }
+    #transform .grid-2 { grid-template-columns: 1fr; gap: 24px; }
+    #cta .btn-neon { width: auto; display: inline-flex; }
+    section:not([id]) > .container > div[style*="1fr 1fr"] { grid-template-columns: 1fr !important; gap: 32px !important; }
+  }
+
+  @media(max-width:480px) {
+    section { padding: 36px 0; }
+    #hero { min-height: auto; padding: 100px 0 60px; }
+    #hero .inner { gap: 24px; }
+    .phone { width: 150px; height: 300px; border-radius: 28px; }
+    .phone-screen { inset: 8px; border-radius: 18px; }
+    .phone-header { padding: 8px 8px 6px; font-size: 9px; }
+    .phone-header p { display: none; }
+    .phone-stat-row { padding: 6px 6px 0; }
+    .phone-stat .val { font-size: 10px; }
+    .phone-stat { padding: 4px; }
+    .phone-card { margin: 4px 6px 0; padding: 6px; }
+    .phone-card .name { font-size: 8px; }
+    .phone-card .sub { font-size: 6px; }
+    .phone-card .price { font-size: 9px; }
+    .phone-badge { font-size: 6px; padding: 1px 4px; }
+    .phone-nav { font-size: 12px; }
+    .phone-nav span { font-size: 5px; }
+    .phone-bottom { padding: 6px 4px; }
+    .phone-glow { width: 140px; height: 140px; }
+    .grid-auto { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .app-card { padding: 14px 12px; border-radius: 12px; }
+    .app-icon { font-size: 22px; margin-bottom: 6px; }
+    .app-card h3 { font-size: 13px; }
+    .app-card p { font-size: 11px; }
+    .cta-box { padding: 28px 16px; }
+    .whatsapp-num { font-size: 14px; }
+    .stats-bar { padding: 24px 0; }
+    .stats-bar .stat-item .num { font-size: 24px; }
+    .stats-bar .stat-item .lbl { font-size: 11px; }
+  }
+
+  @media(max-width:400px) {
+    .grid-auto { grid-template-columns: 1fr; }
+    h1 { font-size: clamp(26px,8vw,32px); }
+    h2 { font-size: clamp(20px,6vw,24px); }
+    .phone { width: 130px; height: 260px; border-radius: 22px; }
+    .phone-screen { inset: 6px; border-radius: 14px; }
+    .phone-header { padding: 6px 6px 4px; font-size: 8px; }
+    .phone-stat-row { padding: 4px 4px 0; }
+    .phone-stat .val { font-size: 9px; }
+    .phone-stat .lbl { font-size: 5px; }
+    .phone-card { margin: 3px 5px 0; padding: 5px; }
+    .phone-card .name { font-size: 7px; }
+    .phone-card .sub { font-size: 5px; }
+    .phone-card .price { font-size: 8px; }
+    .phone-bottom { padding: 4px 3px; }
+    .phone-nav { font-size: 10px; }
+    .phone-nav span { font-size: 4px; }
+    .phone-glow { width: 100px; height: 100px; }
+    .stats-bar .stat-item .num { font-size: 20px; }
+  }
 </style>
 </head>
 <body>
