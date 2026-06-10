@@ -7,9 +7,9 @@
   </defs>
   <rect width="512" height="512" rx="80" fill="url(#bg)"/>
   <!-- K letter shape -->
-  <path d="M120 80 L120 432" stroke="#39FF14" stroke-width="28" stroke-linecap="round"/>
-  <path d="M140 256 L320 100 L320 100" stroke="#39FF14" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-  <path d="M140 256 L320 412" stroke="#39FF14" stroke-width="24" stroke-linecap="round" fill="none"/>
+  <path d="M120 80 L120 432" stroke="#22C55E" stroke-width="28" stroke-linecap="round"/>
+  <path d="M140 256 L320 100 L320 100" stroke="#22C55E" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M140 256 L320 412" stroke="#22C55E" stroke-width="24" stroke-linecap="round" fill="none"/>
   <!-- accent dot -->
   <circle cx="360" cy="120" r="16" fill="#00E5FF"/>
 </svg>

@@ -18,11 +18,11 @@
     --bg:      #071426;
     --bg2:     #0B1E38;
     --bg3:     #0F2647;
-    --neon:    #39FF14;
-    --neon2:   #00E5FF;
+    --neon:    #22C55E;
+    --neon2:   #14B8A6;
     --white:   #FFFFFF;
     --muted:   #94A3B8;
-    --border:  rgba(57,255,20,.15);
+    --border:  rgba(34,197,94,.15);
     --card:    rgba(255,255,255,.04);
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -40,13 +40,13 @@
     text-transform: uppercase; color: var(--neon);
     border: 1px solid var(--border);
     padding: 5px 14px; border-radius: 20px;
-    background: rgba(57,255,20,.06);
+    background: rgba(34,197,94,.06);
     margin-bottom: 18px;
   }
   h1 { font-size: clamp(32px,6vw,58px); font-weight: 900; line-height: 1.08; letter-spacing: -1px; }
   h2 { font-size: clamp(24px,4vw,40px); font-weight: 800; line-height: 1.15; }
   h3 { font-size: 17px; font-weight: 700; }
-  .highlight { color: var(--neon); text-shadow: 0 0 24px rgba(57,255,20,.4); }
+  .highlight { color: var(--neon); text-shadow: 0 0 20px rgba(34,197,94,.25); }
   .lead { font-size: clamp(15px,2vw,18px); color: var(--muted); line-height: 1.7; max-width: 580px; }
   .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
   section { padding: 80px 0; position: relative; }
@@ -57,7 +57,7 @@
     font-family: 'Inter'; font-weight: 800; font-size: 16px;
     padding: 16px 32px; border-radius: 12px; border: none; cursor: pointer;
     text-decoration: none;
-    box-shadow: 0 0 24px rgba(57,255,20,.5), 0 0 60px rgba(57,255,20,.15);
+    box-shadow: 0 0 24px rgba(34,197,94,.5), 0 0 60px rgba(34,197,94,.15);
     transition: all .2s;
     position: relative; overflow: hidden;
   }
@@ -69,7 +69,7 @@
     transform: skewX(-20deg);
     transition: left .4s;
   }
-  .btn-neon:hover { transform: translateY(-2px); box-shadow: 0 0 36px rgba(57,255,20,.7), 0 0 80px rgba(57,255,20,.2); }
+  .btn-neon:hover { transform: translateY(-2px); box-shadow: 0 0 36px rgba(34,197,94,.7), 0 0 80px rgba(34,197,94,.2); }
   .btn-neon:hover::before { left: 130%; }
 
   .btn-ghost {
@@ -98,7 +98,7 @@
     min-height: 100vh;
     display: flex; align-items: center;
     background:
-      radial-gradient(ellipse 70% 60% at 80% 20%, rgba(57,255,20,.07) 0%, transparent 70%),
+      radial-gradient(ellipse 70% 60% at 80% 20%, rgba(34,197,94,.07) 0%, transparent 70%),
       radial-gradient(ellipse 50% 40% at 10% 80%, rgba(0,229,255,.06) 0%, transparent 60%),
       var(--bg);
     padding-top: 80px;
@@ -116,9 +116,9 @@
     width: 220px; height: 440px;
     background: linear-gradient(160deg, #0F2647, #071426);
     border-radius: 36px;
-    border: 2px solid rgba(57,255,20,.3);
+    border: 2px solid rgba(34,197,94,.3);
     box-shadow:
-      0 0 40px rgba(57,255,20,.15),
+      0 0 40px rgba(34,197,94,.15),
       0 40px 80px rgba(0,0,0,.6),
       inset 0 1px 0 rgba(255,255,255,.06);
     position: relative; overflow: hidden;
@@ -144,9 +144,9 @@
     display: flex; gap: 6px; padding: 10px 10px 0;
   }
   .phone-stat {
-    flex: 1; background: rgba(57,255,20,.1); border-radius: 8px;
+    flex: 1; background: rgba(34,197,94,.1); border-radius: 8px;
     padding: 8px 6px; text-align: center;
-    border: 1px solid rgba(57,255,20,.15);
+    border: 1px solid rgba(34,197,94,.15);
   }
   .phone-stat .val { font-size: 15px; font-weight: 800; color: var(--neon); }
   .phone-stat .lbl { font-size: 7px; color: var(--muted); margin-top: 1px; }
@@ -159,7 +159,7 @@
   .phone-card .name { font-size: 10px; font-weight: 700; color: #fff; }
   .phone-card .sub  { font-size: 8px; color: var(--muted); margin-top: 1px; }
   .phone-card .price { font-size: 11px; font-weight: 800; color: var(--neon); }
-  .phone-badge { font-size: 7px; padding: 2px 6px; border-radius: 8px; font-weight: 700; background: rgba(57,255,20,.15); color: var(--neon); }
+  .phone-badge { font-size: 7px; padding: 2px 6px; border-radius: 8px; font-weight: 700; background: rgba(34,197,94,.15); color: var(--neon); }
   .phone-bottom {
     display: flex; justify-content: space-around;
     padding: 10px 8px;
@@ -172,7 +172,7 @@
   .phone-nav.active span { color: #EA580C; }
   .phone-glow {
     position: absolute; width: 300px; height: 300px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(57,255,20,.12), transparent 70%);
+    background: radial-gradient(circle, rgba(34,197,94,.12), transparent 70%);
     top: 50%; left: 50%; transform: translate(-50%,-50%);
     pointer-events: none;
   }
@@ -186,7 +186,7 @@
     content: "\2713";
     display: inline-flex; align-items: center; justify-content: center;
     width: 22px; height: 22px; border-radius: 6px; flex-shrink: 0;
-    background: rgba(57,255,20,.15); color: var(--neon);
+    background: rgba(34,197,94,.15); color: var(--neon);
     font-size: 12px; font-weight: 800; margin-top: 1px;
   }
 
@@ -202,10 +202,10 @@
   }
   .app-card::after {
     content: ""; position: absolute; inset: 0; border-radius: 16px;
-    background: linear-gradient(135deg, rgba(57,255,20,.05), transparent);
+    background: linear-gradient(135deg, rgba(34,197,94,.05), transparent);
     opacity: 0; transition: opacity .2s;
   }
-  .app-card:hover { border-color: rgba(57,255,20,.4); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(57,255,20,.08); }
+  .app-card:hover { border-color: rgba(34,197,94,.4); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(34,197,94,.08); }
   .app-card:hover::after { opacity: 1; }
   .app-icon { font-size: 32px; margin-bottom: 10px; }
   .app-card h3 { font-size: 15px; color: var(--white); }
@@ -234,7 +234,7 @@
   }
   .feature-pill {
     display: inline-flex; align-items: center; gap: 6px;
-    background: rgba(57,255,20,.07); border: 1px solid rgba(57,255,20,.2);
+    background: rgba(34,197,94,.07); border: 1px solid rgba(34,197,94,.2);
     border-radius: 8px; padding: 8px 14px;
     font-size: 13px; font-weight: 600; color: #CBD5E1;
     margin: 4px;
@@ -247,21 +247,21 @@
     padding: 32px 0;
   }
   .stat-item { text-align: center; }
-  .stat-item .num { font-size: 36px; font-weight: 900; color: var(--neon); text-shadow: 0 0 20px rgba(57,255,20,.3); }
+  .stat-item .num { font-size: 36px; font-weight: 900; color: var(--neon); text-shadow: 0 0 20px rgba(34,197,94,.3); }
   .stat-item .lbl { font-size: 13px; color: var(--muted); margin-top: 4px; }
 
   #cta {
     background:
-      radial-gradient(ellipse 80% 60% at 50% 50%, rgba(57,255,20,.06), transparent),
+      radial-gradient(ellipse 80% 60% at 50% 50%, rgba(34,197,94,.06), transparent),
       var(--bg);
     text-align: center;
   }
   .cta-box {
     background: linear-gradient(135deg, #0B1E38, #0F2647);
-    border: 1px solid rgba(57,255,20,.2);
+    border: 1px solid rgba(34,197,94,.2);
     border-radius: 28px; padding: 60px 40px;
     position: relative; overflow: hidden;
-    box-shadow: 0 0 60px rgba(57,255,20,.05);
+    box-shadow: 0 0 60px rgba(34,197,94,.05);
   }
   .cta-box::before {
     content: "";
@@ -270,7 +270,7 @@
   }
   .whatsapp-num {
     display: inline-flex; align-items: center; gap: 10px;
-    background: rgba(57,255,20,.08); border: 1px solid rgba(57,255,20,.2);
+    background: rgba(34,197,94,.08); border: 1px solid rgba(34,197,94,.2);
     border-radius: 12px; padding: 12px 22px;
     font-size: 18px; font-weight: 800; color: var(--neon);
     margin-bottom: 28px; letter-spacing: 1px;
@@ -309,9 +309,9 @@
     padding: 9px 20px; border-radius: 8px; cursor: pointer;
     text-decoration: none;
     transition: all .2s;
-    box-shadow: 0 0 14px rgba(57,255,20,.35);
+    box-shadow: 0 0 14px rgba(34,197,94,.35);
   }
-  .nav-cta:hover { box-shadow: 0 0 24px rgba(57,255,20,.6); transform: translateY(-1px); }
+  .nav-cta:hover { box-shadow: 0 0 24px rgba(34,197,94,.6); transform: translateY(-1px); }
 
   footer {
     border-top: 1px solid var(--border);
@@ -410,9 +410,9 @@
               <div class="row">
                 <div style="flex:1">
                   <div class="name" style="font-size:9px;color:var(--muted)">SALDO DO MÊS</div>
-                  <div class="val" style="font-size:16px;font-weight:900;color:#39FF14;margin-top:2px;">R$ 18.400</div>
+                  <div class="val" style="font-size:16px;font-weight:900;color:var(--neon);margin-top:2px;">R$ 18.400</div>
                 </div>
-                <div style="font-size:9px;color:#39FF14">↑ +23%</div>
+                <div style="font-size:9px;color:var(--neon)">↑ +23%</div>
               </div>
             </div>
             <div class="phone-bottom">
@@ -499,7 +499,7 @@
         <h3>Empresas de Serviços</h3>
         <p>Vidraçaria, elétrica, pintura, hidráulica e muito mais.</p>
       </div>
-      <div class="app-card fade-up" style="border-color:rgba(57,255,20,.3);background:rgba(57,255,20,.04);">
+      <div class="app-card fade-up" style="border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.04);">
         <div class="app-icon">✨</div>
         <h3>Sob Medida</h3>
         <p style="color:var(--neon)">Qualquer ideia. Desenvolvemos exatamente o que você precisa.</p>
@@ -530,7 +530,7 @@
       </div>
       <div class="fade-up">
         <div style="display:flex;flex-direction:column;gap:16px;">
-          <div style="background:rgba(57,255,20,.04);border:1px solid rgba(57,255,20,.2);border-radius:16px;padding:24px;">
+          <div style="background:rgba(34,197,94,.04);border:1px solid rgba(34,197,94,.2);border-radius:16px;padding:24px;">
             <p style="font-size:12px;font-weight:700;color:var(--neon);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;">✅ PWA — Nossa solução</p>
             <ul class="check-list">
               <li>Sem aprovação de loja</li>
@@ -614,19 +614,19 @@
       </div>
       <div class="fade-up" style="display:flex;flex-direction:column;gap:14px;">
         <div style="display:flex;align-items:flex-start;gap:14px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;">
-          <div style="width:36px;height:36px;border-radius:10px;background:rgba(57,255,20,.12);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">💬</div>
+          <div style="width:36px;height:36px;border-radius:10px;background:rgba(34,197,94,.12);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">💬</div>
           <div><p style="font-weight:700;font-size:14px;color:var(--white)">Levantamento de requisitos</p><p style="font-size:13px;color:var(--muted);margin-top:3px;">Conversamos sobre sua ideia e mapeamos tudo que precisa ser feito.</p></div>
         </div>
         <div style="display:flex;align-items:flex-start;gap:14px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;">
-          <div style="width:36px;height:36px;border-radius:10px;background:rgba(57,255,20,.12);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">⚡</div>
+          <div style="width:36px;height:36px;border-radius:10px;background:rgba(34,197,94,.12);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">⚡</div>
           <div><p style="font-weight:700;font-size:14px;color:var(--white)">Desenvolvimento ágil</p><p style="font-size:13px;color:var(--muted);margin-top:3px;">Entregamos versões rápidas para você acompanhar o progresso.</p></div>
         </div>
         <div style="display:flex;align-items:flex-start;gap:14px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;">
-          <div style="width:36px;height:36px;border-radius:10px;background:rgba(57,255,20,.12);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🎓</div>
+          <div style="width:36px;height:36px;border-radius:10px;background:rgba(34,197,94,.12);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🎓</div>
           <div><p style="font-weight:700;font-size:14px;color:var(--white)">Treinamento incluído</p><p style="font-size:13px;color:var(--muted);margin-top:3px;">Treinamos você e sua equipe para usar o sistema com confiança.</p></div>
         </div>
         <div style="display:flex;align-items:flex-start;gap:14px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;">
-          <div style="width:36px;height:36px;border-radius:10px;background:rgba(57,255,20,.12);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🛡️</div>
+          <div style="width:36px;height:36px;border-radius:10px;background:rgba(34,197,94,.12);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🛡️</div>
           <div><p style="font-weight:700;font-size:14px;color:var(--white)">Suporte contínuo</p><p style="font-size:13px;color:var(--muted);margin-top:3px;">Estamos disponíveis para manutenção e melhorias quando precisar.</p></div>
         </div>
       </div>
