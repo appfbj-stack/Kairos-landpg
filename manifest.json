@@ -1,0 +1,19 @@
+{
+  "name": "Kairos App - Criamos Aplicativos PWA",
+  "short_name": "Kairos App",
+  "description": "Transformamos sua ideia em um aplicativo profissional PWA",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#071426",
+  "background_color": "#071426",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
